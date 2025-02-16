@@ -5,12 +5,14 @@
 :root {
   --theme-transition-duration: 0.5s;
   --theme-line-height: 2px;
+  --accent-light: #557187;
+  --accent-dark: #60a4d9;
 }
 
 body {
   min-height: 100vh;
   position: relative;
-  font-family: Arial, Helvetica, sans-serif;
+  
 }
 
 /* Theme transition line */
@@ -21,12 +23,17 @@ body::after {
   left: 0;
   right: 0;
   height: var(--theme-line-height);
-  background: #557187;
+  background: var(--accent-light);
   transform: scaleY(0) translateY(0);
   transition: transform var(--theme-transition-duration) cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 9999;
   pointer-events: none;
-  box-shadow: 0 0 20px 6px rgba(85, 113, 135, 0.4);
+  box-shadow: 0 0 20px 6px rgba(var(--accent-light), 0.4);
+}
+
+.dark body::after {
+  background: var(--accent-dark);
+  box-shadow: 0 0 20px 6px rgba(var(--accent-dark), 0.4);
 }
 
 /* Create a pseudo-element for the following gradient */
@@ -49,11 +56,11 @@ body::before {
 /* Define the background colors for both themes */
 body {
   --current-theme-bg: #F5F5F5;
-  --next-theme-bg: #1A1A1A;
+  --next-theme-bg: #4C4C4C;
 }
 
 .dark {
-  --current-theme-bg: #1A1A1A;
+  --current-theme-bg: #4C4C4C;
   --next-theme-bg: #F5F5F5;
 }
 

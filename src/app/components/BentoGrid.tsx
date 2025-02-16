@@ -74,10 +74,7 @@ const imageData: GridItem[] = imageUrls.map((url) => {
 });
 
 // Reduce number of filler boxes
-const fillerBoxes: GridItem[] = Array(3).fill(null).map((_, i) => ({ 
-  type: 'filler', 
-  id: `filler-${i}` 
-}));
+
 
 type CardType = {
   type: 'hero' | 'feature' | 'stat';
@@ -88,37 +85,6 @@ type CardType = {
   number?: string;
   label?: string;
 };
-
-const contentCards: CardType[] = [
-  {
-    type: 'hero',
-    span: 'col-span-full',
-    title: 'Creative Designer & Visual Artist',
-    description: 'Crafting meaningful digital experiences through minimalist design'
-  },
-  {
-    type: 'stat',
-    span: 'md:col-span-1',
-    icon: FaCode,
-    number: '50+',
-    label: 'Projects',
-    title: 'Completed Works'
-  },
-  {
-    type: 'feature',
-    span: 'md:col-span-1',
-    icon: FaPalette,
-    title: 'Design',
-    description: 'UI/UX Focus'
-  },
-  {
-    type: 'feature',
-    span: 'md:col-span-1',
-    icon: FaLightbulb,
-    title: 'Creative',
-    description: 'Innovation'
-  }
-];
 
 const fadeInUp = {
   initial: { y: 20, opacity: 0 },
@@ -143,37 +109,37 @@ export default function BentoGrid() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {/* Main Hero Card */}
             <div className="md:col-span-3 rounded-2xl bg-white dark:bg-[#242424] p-8 shadow-sm hover:shadow-lg transition-all duration-300">
-              <h1 className="text-4xl md:text-5xl font-bold text-center mb-4 text-[#557187] dark:text-[#557187]">
-                Creative Designer & Visual Artist
+              <h1 className="text-4xl md:text-5xl font-bold text-left mb-6 text-[var(--accent-light)] dark:text-[var(--accent-dark)] leading-tight">
+                Digital Media & Graphic Design
               </h1>
-              <p className="text-lg text-center text-[#4C4C4C] dark:text-[#F5F5F5]">
-                Crafting meaningful digital experiences through minimalist design
+              <p className="text-lg text-left text-[#4C4C4C] dark:text-[#F5F5F5] leading-relaxed">
+                Creating intuitive digital experiences with a focus on user-centered design
               </p>
             </div>
             
             {/* Stats and Features */}
-            <div className="rounded-2xl bg-white dark:bg-[#242424] p-6 shadow-sm hover:shadow-lg transition-all duration-300 text-center">
-              <FaCode className="text-[#557187] text-3xl mb-2 mx-auto" />
-              <span className="text-3xl font-bold text-[#557187] block">50+</span>
-              <span className="text-sm text-[#4C4C4C] dark:text-[#F5F5F5]">Projects</span>
+            {/* <div className="rounded-2xl bg-white dark:bg-[#242424] p-6 shadow-sm hover:shadow-lg transition-all duration-300 text-center">
+              <FaCode className="text-[var(--accent-light)] dark:text-[var(--accent-dark)] text-3xl mb-2 mx-auto" />
+              <span className="text-3xl font-bold text-[var(--accent-light)] dark:text-[var(--accent-dark)] block">5+</span>
+              <span className="text-sm text-[#4C4C4C] dark:text-[#F5F5F5]">Years Experience</span>
             </div>
             
             <div className="rounded-2xl bg-white dark:bg-[#242424] p-6 shadow-sm hover:shadow-lg transition-all duration-300">
-              <FaPalette className="text-[#557187] text-2xl mb-4 mx-auto" />
-              <h3 className="text-xl font-bold mb-2 text-[#557187] text-center">Design</h3>
-              <p className="text-sm text-[#4C4C4C] dark:text-[#F5F5F5] text-center">UI/UX Focus</p>
+              <FaPalette className="text-[var(--accent-light)] dark:text-[var(--accent-dark)] text-2xl mb-4 mx-auto" />
+              <h3 className="text-xl font-bold mb-2 text-[var(--accent-light)] dark:text-[var(--accent-dark)] text-center">UI/UX</h3>
+              <p className="text-sm text-[#4C4C4C] dark:text-[#F5F5F5] text-center">User-Centered Design</p>
             </div>
             
             <div className="rounded-2xl bg-white dark:bg-[#242424] p-6 shadow-sm hover:shadow-lg transition-all duration-300">
-              <FaLightbulb className="text-[#557187] text-2xl mb-4 mx-auto" />
-              <h3 className="text-xl font-bold mb-2 text-[#557187] text-center">Creative</h3>
-              <p className="text-sm text-[#4C4C4C] dark:text-[#F5F5F5] text-center">Innovation</p>
-            </div>
+              <FaLightbulb className="text-[var(--accent-light)] dark:text-[var(--accent-dark)] text-2xl mb-4 mx-auto" />
+              <h3 className="text-xl font-bold mb-2 text-[var(--accent-light)] dark:text-[var(--accent-dark)] text-center">Strategy</h3>
+              <p className="text-sm text-[#4C4C4C] dark:text-[#F5F5F5] text-center">Design Solutions</p>
+            </div> */}
           </div>
         </motion.div>
 
         {/* Image Grid */}
-        {[...imageData, ...fillerBoxes].map((item, index) => (
+        {imageData.map((item, index) => (
           <motion.div
             key={item.type === 'image' ? item.src : item.id}
             className="break-inside-avoid mb-4"
@@ -187,12 +153,12 @@ export default function BentoGrid() {
                     alt={`Portfolio piece ${index + 1}`}
                     width={item.width}
                     height={item.height}
-                    className="w-full h-auto hover:scale-105 transition-transform duration-300"
+                    className="w-full h-auto scale-102 hover:scale-110 transition-transform duration-300"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                 </div>
               ) : (
-                <div className="w-full bg-[#557187]/5 dark:bg-[#557187]/10 h-[200px]" />
+                <div className="w-full bg-[var(--accent-light)]/5 dark:bg-[var(--accent-dark)]/10 h-[200px]" />
               )}
             </div>
           </motion.div>

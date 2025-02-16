@@ -1,14 +1,17 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+import { Manrope, Poppins } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 import Header from "./components/Header";
+import { Toaster } from 'react-hot-toast';
 
 const poppins = Poppins({
   subsets: ['latin'],
   weight: ['400', '700'],
   display: 'swap',
 });
+
+
 
 export const metadata: Metadata = {
   title: "Jessica Lee - Creative Designer & Visual Artist",
@@ -26,6 +29,7 @@ export default function RootLayout({
         <Providers>
           <Header />
           {children}
+          <Toaster position="bottom-right" />
         </Providers>
       </body>
     </html>
