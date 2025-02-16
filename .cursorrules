@@ -1,0 +1,69 @@
+// Color Palette
+const colors = {
+  accent: '#557187',
+  offWhite: '#F5F5F5',
+  offBlack: '#1A1A1A',
+  cardBg: {
+    light: '#FFFFFF',
+    dark: '#242424'
+  }
+}
+
+// Typography
+const typography = {
+  heading: 'font-poppins font-bold',
+  body: 'font-poppins font-normal'
+}
+
+// Spacing
+const spacing = {
+  container: 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8',
+  section: 'py-12 sm:py-16 lg:py-20'
+}
+
+// Animations
+const animations = {
+  fadeIn: 'animate-fade-in duration-500',
+  slideUp: 'animate-slide-up duration-500',
+  stagger: 'animate-stagger duration-500',
+  themeTransition: 'transition-all duration-500'
+}
+
+// Card Styles
+const cardStyles = {
+  base: 'rounded-2xl transition-all duration-500',
+  hover: 'hover:shadow-lg hover:scale-[1.02] duration-300',
+  dark: 'bg-[#242424] text-offWhite',
+  light: 'bg-white text-offBlack'
+}
+
+// Responsive Design
+const breakpoints = {
+  sm: '640px',
+  md: '768px',
+  lg: '1024px',
+  xl: '1280px'
+}
+
+// Component Rules
+const rules = {
+  buttons: {
+    primary: 'bg-[#557187] text-white rounded-full px-6 py-2 transition-all hover:bg-[#445a6d]',
+    secondary: 'border border-[#557187] text-[#557187] rounded-full px-6 py-2 transition-all hover:bg-[#557187] hover:text-white'
+  },
+  images: {
+    default: 'object-cover rounded-lg',
+    hover: 'transition-all duration-300 hover:scale-[1.02]'
+  }
+}
+
+// Export all rules
+module.exports = {
+  colors,
+  typography,
+  spacing,
+  animations,
+  cardStyles,
+  breakpoints,
+  rules
+} 

@@ -1,0 +1,132 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --theme-transition-duration: 0.5s;
+  --theme-line-height: 2px;
+}
+
+body {
+  min-height: 100vh;
+  position: relative;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Theme transition line */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--theme-line-height);
+  background: #557187;
+  transform: scaleY(0) translateY(0);
+  transition: transform var(--theme-transition-duration) cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 9999;
+  pointer-events: none;
+  box-shadow: 0 0 20px 6px rgba(85, 113, 135, 0.4);
+}
+
+/* Create a pseudo-element for the following gradient */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    var(--next-theme-bg) 0%,
+    var(--next-theme-bg) calc(var(--theme-progress, 0) * 1%),
+    transparent calc(var(--theme-progress, 0) * 1%),
+    transparent 100%
+  );
+  z-index: 9998;
+  pointer-events: none;
+  transition: --theme-progress var(--theme-transition-duration) linear;
+}
+
+/* Define the background colors for both themes */
+body {
+  --current-theme-bg: #F5F5F5;
+  --next-theme-bg: #1A1A1A;
+}
+
+.dark {
+  --current-theme-bg: #1A1A1A;
+  --next-theme-bg: #F5F5F5;
+}
+
+/* Apply the line animation when theme is changing */
+body[data-theme-changing="true"]::after {
+  transform: scaleY(1) translateY(100vh);
+}
+
+body[data-theme-changing="true"] {
+  --theme-progress: 100;
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+  }
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
