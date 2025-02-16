@@ -60,8 +60,7 @@ export default function Header({ isAdmin }: HeaderProps) {
   };
 
   const socialLinks = [
-    { icon: FaLinkedin, href: "https://www.linkedin.com/in/jessicaleehornung/", label: "LinkedIn" },
-    { icon: FaBehance, href: "https://www.behance.net/jessicaleehornung", label: "Behance" }
+    { icon: FaLinkedin, href: "https://www.linkedin.com/in/jessica-hornung-a522b428a/", label: "LinkedIn" }
   ];
 
   return (
@@ -205,20 +204,11 @@ export default function Header({ isAdmin }: HeaderProps) {
                         <FaTasks className="mr-2 h-4 w-4" />
                         <span>Manage Projects</span>
                       </DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => router.push('/settings')} className="cursor-pointer">
+                      {/* <DropdownMenuItem onClick={() => router.push('/settings')} className="cursor-pointer">
                         <FaCog className="mr-2 h-4 w-4" />
                         <span>Settings</span>
-                      </DropdownMenuItem>
-                      {isAdmin && (
-                        <>
-                          <DropdownMenuSeparator />
-                          <DropdownMenuItem onClick={() => router.push('/admin')} className="cursor-pointer">
-                            <FaUserCircle className="mr-2 h-4 w-4" />
-                            <span>Admin Dashboard</span>
-                          </DropdownMenuItem>
-                        </>
-                      )}
-                      <DropdownMenuSeparator />
+                      </DropdownMenuItem> */}
+                      {/* <DropdownMenuSeparator /> */}
                       <DropdownMenuItem onClick={() => signOut()} className="cursor-pointer text-red-600 dark:text-red-400">
                         <FaSignOutAlt className="mr-2 h-4 w-4" />
                         <span>Sign Out</span>

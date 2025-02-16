@@ -14,9 +14,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
-    { icon: FaGithub, href: "#", label: "GitHub" },
-    { icon: FaLinkedin, href: "#", label: "LinkedIn" },
-    { icon: FaBehance, href: "#", label: "Behance" }
+    { icon: FaLinkedin, href: "https://www.linkedin.com/in/jessicaleehornung/", label: "LinkedIn" },
   ];
 
   const navLinks = [

@@ -16,7 +16,7 @@ export default function AuthError() {
             You are not authorized to access this area. Please contact the administrator if you believe this is a mistake.
           </p>
 
-          <Link href="/" className={rules.buttons.secondary}>
+          <Link href="/" className={`${rules.buttons.secondary} !py-1.5 !px-4 text-sm flex items-center gap-2 w-fit`}>
             Return to Home
           </Link>
         </div>
