@@ -86,7 +86,7 @@ export default function Header({ isAdmin }: HeaderProps) {
           }
         }
       `}</style>
-      <header className="w-full z-50 bg-[#F5F5F5]/80 dark:bg-[#1A1A1A]/80 backdrop-blur-sm transition-[background-color] duration-[0ms] delay-[calc(var(--theme-progress,0)*5ms)]">
+      <header className="w-full z-50 bg-[#F5F5F5]/80 dark:bg-[#1A1A1A]/80 backdrop-blur-sm transition-[background-color] duration-[calc(0ms)] delay-[calc(var(--theme-progress,0)*5ms)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
           <motion.div
             className="flex items-center gap-3"
@@ -105,7 +105,7 @@ export default function Header({ isAdmin }: HeaderProps) {
                 />
               </div>
               <h1 className="text-2xl font-bold flex">
-                <span className="text-[#4C4C4C] dark:text-[#F5F5F5] transition-colors duration-[0ms] delay-[calc(var(--theme-progress,0)*5ms)]">jessica</span>
+                <span className="text-[#4C4C4C] dark:text-[#F5F5F5] transition-colors duration-[calc(0ms)] delay-[calc(var(--theme-progress,0)*5ms)]">jessica</span>
                 <span className="text-[var(--accent-light)] dark:text-[var(--accent-dark)]">lee</span>
               </h1>
             </Link>

@@ -15,6 +15,9 @@ const nextConfig: NextConfig = {
       {
         hostname: "images.unsplash.com",
       },
+      {
+        hostname: "ian90so1p2.ufs.sh",
+      }
     ],
   },
 };
