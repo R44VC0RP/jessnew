@@ -34,7 +34,16 @@ interface FormData {
   body: string;
   tags: string[];
   featured: boolean;
-  madeFor: string | null;
+  images: Image[];
+  featuredImageId: string;
+}
+
+interface ProjectFormData {
+  id?: string;
+  name: string;
+  body: string;
+  tags: string[];
+  featured: boolean;
   images: Image[];
   featuredImageId: string;
 }
@@ -134,7 +143,6 @@ export default function EditProjectPage({ params }: { params: Promise<{ id: stri
     body: project.body,
     tags: project.tags,
     featured: project.featured,
-    madeFor: project.madeFor,
     images: project.images,
     featuredImageId: project.featuredImageId || ''
   };
