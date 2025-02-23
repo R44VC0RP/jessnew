@@ -6,6 +6,14 @@ import { isAdminEmail } from "@/lib/auth";
 
 const f = createUploadthing();
 
+const auth = async () => {
+  const session = await getServerSession(authOptions);
+  if (!session || !session.user?.email || !isAdminEmail(session.user.email)) {
+    throw new UploadThingError("Unauthorized");
+  }
+  return { email: session.user.email };
+};
+
 // FileRouter for your app, can contain multiple FileRoutes
 export const ourFileRouter = {
   // Define as many FileRoutes as you like, each with a unique routeSlug
@@ -19,25 +27,14 @@ export const ourFileRouter = {
       maxFileCount: 10,
     },
   })
-    .middleware(async ({ req }) => {
-      // This code runs on your server before upload
-      const session = await getServerSession(authOptions);
-      const userEmail = session?.user?.email;
-
-      // If you throw, the user will not be able to upload
-      if (!userEmail || !isAdminEmail(userEmail)) {
-        throw new UploadThingError("Unauthorized - Admin only");
-      }
-
-      // Whatever is returned here is accessible in onUploadComplete as `metadata`
-      return { userEmail };
+    .middleware(async () => {
+      const { email } = await auth();
+      return { email };
     })
     .onUploadComplete(async ({ metadata, file }) => {
-      // This code RUNS ON YOUR SERVER after upload
-      console.log("Upload complete for user:", metadata.userEmail);
-      console.log("file url", file.url);
-
-      return { uploadedBy: metadata.userEmail, url: file.url };
+      console.log("Upload complete for user:", metadata.email);
+      console.log("File URL:", file.ufsUrl);
+      return { uploadedBy: metadata.email, url: file.ufsUrl };
     }),
 
   // Project image uploader with different rules
@@ -47,21 +44,14 @@ export const ourFileRouter = {
       maxFileCount: 1,
     },
   })
-    .middleware(async ({ req }) => {
-      const session = await getServerSession(authOptions);
-      const userEmail = session?.user?.email;
-
-      if (!userEmail || !isAdminEmail(userEmail)) {
-        throw new UploadThingError("Unauthorized - Admin only");
-      }
-
-      return { userEmail };
+    .middleware(async () => {
+      const { email } = await auth();
+      return { email };
     })
     .onUploadComplete(async ({ metadata, file }) => {
-      console.log("Project image upload complete for user:", metadata.userEmail);
-      console.log("file url", file.url);
-
-      return { uploadedBy: metadata.userEmail, url: file.url };
+      console.log("Project image upload complete for user:", metadata.email);
+      console.log("File URL:", file.ufsUrl);
+      return { uploadedBy: metadata.email, url: file.ufsUrl };
     }),
 } satisfies FileRouter;
 

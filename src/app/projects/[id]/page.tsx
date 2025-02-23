@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useSession } from "next-auth/react";
 import { FaCalendar, FaTag, FaBuilding, FaStar, FaEdit, FaTrash, FaSpinner, FaTimes } from "react-icons/fa";
-import Image from "next/image";
+import Image from 'next/image';
 import { useRouter } from "next/navigation";
 import { Button } from "@/app/components/ui/Button";
 import { typography, cardStyles, spacing } from "@/lib/styles";
@@ -29,7 +29,7 @@ interface Project {
 }
 
 export default function ProjectPage({ params }: { params: Promise<{ id: string }> }) {
-  const resolvedParams = use(params);
+  const { id } = use(params);
   const { data: session, status } = useSession();
   const router = useRouter();
   const [project, setProject] = useState<Project | null>(null);
@@ -39,11 +39,11 @@ export default function ProjectPage({ params }: { params: Promise<{ id: string }
 
   useEffect(() => {
     fetchProject();
-  }, [resolvedParams.id]);
+  }, [id]);
 
   const fetchProject = async () => {
     try {
-      const response = await fetch(`/api/projects/${resolvedParams.id}`);
+      const response = await fetch(`/api/projects/${id}`);
       if (!response.ok) {
         throw new Error('Failed to fetch project');
       }
@@ -62,7 +62,7 @@ export default function ProjectPage({ params }: { params: Promise<{ id: string }
     
     setIsDeleting(true);
     try {
-      const response = await fetch(`/api/projects/${resolvedParams.id}`, {
+      const response = await fetch(`/api/projects/${id}`, {
         method: 'DELETE',
       });
       
@@ -173,13 +173,14 @@ export default function ProjectPage({ params }: { params: Promise<{ id: string }
                   className={`${cardStyles.base} overflow-hidden relative group cursor-pointer w-full`}
                   onClick={() => setSelectedImage(image)}
                 >
-                  <div className="relative aspect-video">
+                  <div className="relative w-full">
                     <Image
                       src={image.url}
                       alt={project.name}
-                      fill
-                      className="object-contain"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 66vw"
+                      width={1200}
+                      height={675}
+                      className="w-full h-auto object-contain"
+                      style={{ maxHeight: '600px' }}
                     />
                   </div>
                 </div>
@@ -188,7 +189,7 @@ export default function ProjectPage({ params }: { params: Promise<{ id: string }
           </div>
 
           {/* Right Column - Details */}
-          <div className="space-y-6">
+          <div className="space-y-6 lg:sticky lg:top-6 lg:self-start">
             {/* Tags */}
             <div className={`${cardStyles.base} ${cardStyles.light} dark:${cardStyles.dark} p-6`}>
               <h2 className={`${typography.heading} text-xl mb-4 text-gray-800 dark:text-gray-200`}>
@@ -232,9 +233,10 @@ export default function ProjectPage({ params }: { params: Promise<{ id: string }
             <Image
               src={selectedImage.url}
               alt="Project preview"
-              fill
-              className="object-contain"
-              sizes="(max-width: 1024px) 100vw, 1024px"
+              width={1920}
+              height={1080}
+              className="w-full h-full object-contain"
+              style={{ maxHeight: '90vh' }}
               priority
             />
             <button

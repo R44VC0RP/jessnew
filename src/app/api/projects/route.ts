@@ -9,10 +9,24 @@ export async function GET() {
     const session = await getServerSession(authOptions);
     const userEmail = session?.user?.email;
 
+    // If not authenticated, only return featured projects
     if (!userEmail || !isAdminEmail(userEmail)) {
-      return new NextResponse('Unauthorized', { status: 401 });
+      const featuredProjects = await prisma.project.findMany({
+        where: {
+          featured: true
+        },
+        include: {
+          images: true,
+          featuredImage: true
+        },
+        orderBy: {
+          createdAt: 'desc'
+        }
+      });
+      return NextResponse.json(featuredProjects);
     }
 
+    // If authenticated as admin, return all projects
     const projects = await prisma.project.findMany({
       where: {
         userEmail: userEmail

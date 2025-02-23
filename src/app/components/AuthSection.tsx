@@ -4,14 +4,12 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import { FaUser, FaSignOutAlt } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { rules, typography } from "@/lib/styles";
+import { isAdminEmail } from "@/lib/auth";
 
 export default function AuthSection() {
   const { data: session } = useSession();
   const router = useRouter();
-
-  // Get the list of admin emails
-  const adminEmails = process.env.ADMIN_EMAIL?.split(',').map(email => email.trim()) || [];
-  const isAdmin = session?.user?.email && adminEmails.includes(session.user.email);
+  const isAdmin = isAdminEmail(session?.user?.email);
 
   return (
     <div suppressHydrationWarning>
@@ -52,4 +50,4 @@ export default function AuthSection() {
       </div>
     </div>
   );
-} 
+}

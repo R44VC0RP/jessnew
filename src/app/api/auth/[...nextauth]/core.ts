@@ -1,5 +1,6 @@
 import { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
+
 export const authOptions: NextAuthOptions = {
     providers: [
       GoogleProvider({
@@ -10,7 +11,7 @@ export const authOptions: NextAuthOptions = {
     callbacks: {
       async signIn({ user }) {
         // Get the list of admin emails and trim whitespace
-        const adminEmails = process.env.ADMIN_EMAIL?.split(',').map(email => email.trim()) || [];
+        const adminEmails = process.env.NEXT_PUBLIC_ADMIN_EMAIL?.split(',').map(email => email.trim()) || [];
         // Check if the user's email is in the list of admin emails
         return adminEmails.includes(user.email || '');
       },
